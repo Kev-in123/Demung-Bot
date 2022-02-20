@@ -57,6 +57,13 @@ class owner(commands.Cog):
             return
         await ctx.send('u fked up')
 
-
+    @commands.command(description="restart the bot")
+    @commands.is_owner()
+    async def restart(self, ctx):
+        await ctx.message.add_reaction('✅️')
+        python = sys.executable
+        os.execl(python, python, *sys.argv)
+        
+        
 def setup(bot):
     bot.add_cog(owner(bot))
