@@ -51,7 +51,7 @@ class levels(commands.Cog):
                 total.append(users[user]["xp"])
         total = sorted(total, reverse=True)
         
-        em = discord.Embed(title = f"The Legion - Leaderboard")
+        em = discord.Embed(title = "The Legion - Leaderboard")
         index = 1
         for amt in total:
                 id_ = leader_board[amt]
