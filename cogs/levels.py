@@ -31,8 +31,7 @@ class levels(commands.Cog):
 
     @commands.command(name='level')
     async def _level(self, ctx, user: discord.Member = None):
-        if not user:
-            user = ctx.author
+        user = user or ctx.author
         if user not in await utils.get_users():
             await utils.start(user.id)
         lvl = await utils.get_lvl(user.id)
