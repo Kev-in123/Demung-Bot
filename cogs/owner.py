@@ -12,7 +12,7 @@ class owner(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, msg):
-        start = ('im', 'i\'m', 'i am')
+        start = ('im ', 'i\'m ', 'i am ')
         if msg.content.lower().startswith(start[0]):
             await msg.channel.send(f'hi {msg.content[3:]}, im Demung')
         elif msg.content.lower().startswith(start[1]):
@@ -56,7 +56,7 @@ class owner(commands.Cog):
             await ctx.send(f'user {user}\'s  blacklist has been removed')
             return
         await ctx.send('u fked up')
-       
-        
+
+
 def setup(bot):
     bot.add_cog(owner(bot))

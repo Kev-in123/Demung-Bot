@@ -1,6 +1,5 @@
 import os
 import asyncio
-from datetime import datetime
 from discord.ext import commands
 from discord.utils import maybe_coroutine
 
@@ -27,7 +26,6 @@ class DemBot(commands.Bot):
 
     def starter(self):
         self.loop.run_until_complete(self.after_ready())
-        self.launch_time = datetime.utcnow()
         self.run(self.token)
 
     @to_call.append

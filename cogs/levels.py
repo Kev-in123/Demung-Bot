@@ -40,5 +40,32 @@ class levels(commands.Cog):
         await ctx.send(embed=embed)
 
 
+    @commands.command(name='leaderboard',aliases=['lb'])
+    async def _lb(self, ctx):
+        users = await utils.get_users()
+        leader_board = {}
+        total = []
+        for user in users:
+                if user=='blacklisted':break
+                leader_board[users[user]["xp"]] = int(user)
+                total.append(users[user]["xp"])
+        total = sorted(total, reverse=True)
+        
+        em = discord.Embed(title = f"The Legion - Leaderboard")
+        index = 1
+        for amt in total:
+                id_ = leader_board[amt]
+                member = self.bot.get_user(id_)
+                em.add_field(name = f"{index}. {member.name}#{member.discriminator}" , value = f"{amt} xp",  inline = False)
+                if index == 10:
+                    break
+                else:
+                    index += 1
+                  
+        em.set_thumbnail(url=ctx.guild.icon_url)
+        await ctx.send(embed = em)
+
+
+  
 def setup(bot):
     bot.add_cog(levels(bot))
