@@ -13,7 +13,7 @@ async def start(user):
     if user in users:
         return
     else:
-        users[user] = {'xp': 0, 'lvl': 0, 'last_xp': 0}
+        users[user] = {'xp': 0, 'lvl': 0, 'last_xp': 0, 'blacklisted': False}
 
     with open('levels.json', 'w') as f:
         json.dump(users, f, sort_keys=True, indent=4)
@@ -84,23 +84,20 @@ async def get_lvl(user):
 
 
 async def blacklist(user):
-    users = await get_users()
     user = str(user)
-    if user in users['blacklisted']:
-        return False
-    users['blacklisted'].append(user)
+    await start(user)
+    users = await get_users()
+    users[user]['blacklisted'] = True
     with open('levels.json', 'w') as f:
         json.dump(users, f, sort_keys=True, indent=4)
     return True
 
 
 async def unblacklist(user):
-    users = await get_users()
     user = str(user)
-    if user not in users['blacklisted']:
-        return False
-    idx = users['blacklisted'].index(user)
-    users['blacklisted'].pop(idx)
+    await start(user)
+    users = await get_users()
+    users[user]['blacklisted'] = False
     with open('levels.json', 'w') as f:
         json.dump(users, f, sort_keys=True, indent=4)
     return True
