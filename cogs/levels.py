@@ -48,8 +48,6 @@ class levels(commands.Cog):
         leader_board = {}
         total = []
         for user in users:
-            if user == 'blacklisted':
-                break
             leader_board[users[user]["xp"]] = int(user)
             total.append(users[user]["xp"])
         total = sorted(total, reverse=True)
