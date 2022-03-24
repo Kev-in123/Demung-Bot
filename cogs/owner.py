@@ -12,6 +12,8 @@ class owner(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, msg):
+        if not msg.guild:
+            return
         start = ('im ', 'i\'m ', 'i am ')
         if msg.content.lower().startswith(start[0]):
             await msg.channel.send(f'hi {msg.content[3:]}, im Demung')
