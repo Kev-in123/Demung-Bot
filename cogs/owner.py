@@ -27,25 +27,6 @@ class owner(commands.Cog):
         if isinstance(err, commands.CommandNotFound):
             return
 
-    @commands.command(name='eval')
-    @commands.is_owner()
-    async def _eval(self, ctx, *, code: codeblock_converter):
-        cog = self.bot.get_cog('Jishaku')
-        await cog.jsk_python(ctx, argument=code)
-
-    @commands.command(description='reload cogs')
-    @commands.is_owner()
-    async def reload(self, ctx, cog=None):
-        if not cog:
-            await ctx.send('Please specify a cog')
-            return
-        try:
-            self.bot.reload_extension(f'cogs.{cog}')
-        except commands.errors.ExtensionNotLoaded:
-            await ctx.send(content=f'{cog} is not loaded')
-            return
-        await ctx.send(content=f'Done reloading `{cog}`')
-
     @commands.command(description='blacklist a user')
     @commands.is_owner()
     async def blacklist(self, ctx, user: discord.Member):
