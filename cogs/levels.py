@@ -18,8 +18,9 @@ class levels(commands.Cog):
         cmd_check = msg.content and cmd[0] == 'dem' and len(cmd) >= 2 and cmd[1] in [
             a.name for a in self.bot.commands]
 
-        users = await utils.get_users()
         await utils.start(msg.author.id)
+        users = await utils.get_users()
+        
         if not users[str(msg.author.id)]['blacklisted'] and not cmd_check:
             await utils.add_xp(msg.author.id, random.randrange(1, 26))
             lvl_up = await utils.lvl_up(msg.author.id)
