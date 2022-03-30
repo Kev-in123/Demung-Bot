@@ -2,6 +2,7 @@ import os
 import asyncio
 from discord.ext import commands
 from discord.utils import maybe_coroutine
+from keep_alive import keep_alive
 
 class ListCall(list):
     def append(self, rhs):
@@ -22,6 +23,7 @@ class DemBot(commands.Bot):
         self.client = None
 
     async def on_ready(self):
+        keep_alive()
         print('Online')
 
     def starter(self):
