@@ -4,6 +4,7 @@ from discord.ext import commands
 from discord.utils import maybe_coroutine
 from keep_alive import keep_alive
 
+
 class ListCall(list):
     def append(self, rhs):
         return super().append(rhs)

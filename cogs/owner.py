@@ -11,21 +11,20 @@ class owner(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, msg):
-      if not msg.guild:
-        return
-      start = ('im ', 'i\'m ', 'i am ')
-      if msg.content.lower().startswith(start[0]):
-        await msg.channel.send(f'hi {msg.content[3:]}, im Demung')
-      elif msg.content.lower().startswith(start[1]):
-        await msg.channel.send(f'hi {msg.content[4:]}, im Demung')
-      elif msg.content.lower().startswith(start[2]):
-        await msg.channel.send(f'hi {msg.content[5:]}, im Demung')
+        if not msg.guild:
+            return
+        start = ('im ', 'i\'m ', 'i am ')
+        if msg.content.lower().startswith(start[0]):
+            await msg.channel.send(f'hi {msg.content[3:]}, im Demung')
+        elif msg.content.lower().startswith(start[1]):
+            await msg.channel.send(f'hi {msg.content[4:]}, im Demung')
+        elif msg.content.lower().startswith(start[2]):
+            await msg.channel.send(f'hi {msg.content[5:]}, im Demung')
 
     @commands.Cog.listener()
     async def on_command_error(self, ctx, err):
         if isinstance(err, commands.CommandNotFound):
             return
-
 
     @commands.command(description='blacklist a user')
     @commands.is_owner()
