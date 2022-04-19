@@ -1,13 +1,20 @@
 import random
 import discord
 from helpers import utils
-from discord.ext import commands
+from discord.ext import commands, tasks
 
 
 class levels(commands.Cog):
+
     def __init__(self, bot):
         self.bot = bot
         self.ignored_channels = ()
+        self.cache = []
+        self.clear_cache.start()
+
+    @tasks.loop(minutes=1.0)
+    async def clear_cache(self):
+        self.cahce = []
 
     @commands.Cog.listener()
     async def on_message(self, msg):
@@ -20,9 +27,14 @@ class levels(commands.Cog):
 
         await utils.start(msg.author.id)
         users = await utils.get_users()
-        
+
         if not users[str(msg.author.id)]['blacklisted'] and not cmd_check:
+            if msg.author.id in self.cache:
+                return
+
             await utils.add_xp(msg.author.id, random.randrange(1, 26))
+            self.cache.append(msg.author.id)
+
             lvl_up = await utils.lvl_up(msg.author.id)
             if lvl_up:
                 lvl = await utils.get_lvl(msg.author.id)
