@@ -42,7 +42,7 @@ class levels(commands.Cog):
                     description=f'{msg.author}, leveled up! **{lvl-1} ➜ {lvl}**')
                 await msg.channel.send(embed=em)
 
-    @commands.command(name='level')
+    @commands.command(name='level', aliases=['lvl'])
     async def _level(self, ctx, user: discord.Member = None):
         user = user or ctx.author
         if user not in await utils.get_users():
