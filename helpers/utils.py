@@ -42,7 +42,6 @@ async def lvl_inc(user, amt):
     await start(user)
     users = await get_users()
     users[user]['lvl'] += amt
-    users[user]['last_xp'] = users[user]['xp']
     with open('levels.json', 'w') as f:
         json.dump(users, f, sort_keys=True, indent=4)
 
@@ -63,6 +62,11 @@ async def lvl_up(user):
     user_lvl = users[user]['lvl']
     user_xp = users[user]['xp']
     last_xp = users[user]['last_xp']
+    
+    users[user]['last_xp'] = users[user]['xp']
+    with open('levels.json', 'w') as f:
+        json.dump(users, f, sort_keys=True, indent=4)
+      
     if user_xp >= 5 * (user_lvl ** 2) + (50 * user_lvl) + 100 + last_xp:
         await lvl_inc(user, 1)
         return True
