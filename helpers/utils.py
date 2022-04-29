@@ -69,7 +69,7 @@ async def lvl_up(user):
       
     if user_xp >= 5 * (user_lvl ** 2) + (50 * user_lvl) + 100 + last_xp:
         await lvl_inc(user, 1)
-        return True
+        return user_lvl+1
     return False
 
 
@@ -105,3 +105,4 @@ async def unblacklist(user):
     with open('levels.json', 'w') as f:
         json.dump(users, f, sort_keys=True, indent=4)
     return True
+    

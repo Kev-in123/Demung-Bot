@@ -32,14 +32,13 @@ class levels(commands.Cog):
             if msg.author.id in self.cache:
                 return
 
-            await utils.add_xp(msg.author.id, random.randrange(1, 26))
+            await utils.add_xp(msg.author.id, random.randrange(15, 26))
             self.cache.append(msg.author.id)
 
             lvl_up = await utils.lvl_up(msg.author.id)
             if lvl_up:
-                lvl = await utils.get_lvl(msg.author.id)
                 em = discord.Embed(
-                    description=f'{msg.author}, leveled up! **{lvl-1} ➜ {lvl}**')
+                    description=f'{msg.author}, leveled up! **{lvl_up-1} ➜ {lvl_up}**')
                 await msg.channel.send(embed=em)
 
     @commands.command(name='level', aliases=['lvl'])
